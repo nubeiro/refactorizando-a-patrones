@@ -1,0 +1,3 @@
+[submodule "sesion_01/original/CS-1301-OpenSCAD"]
+	path = sesion_01/original/CS-1301-OpenSCAD
+	url = https://github.com/Hillbp/CS-1301-OpenSCAD.git
