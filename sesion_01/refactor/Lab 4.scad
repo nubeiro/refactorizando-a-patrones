@@ -1,144 +1,122 @@
-/*
-Filename: Lab 4.scad
-Name: Brandon Hill
-Date: 10/28/14
-		I worked on this assignment alone, but I referred to http://blog.cubehero.com/2013/11/19/know-only-10-things-to-be-dangerous-in-openscad/ for inspiration and instructions ("bishop" module is based heavily off of the code from this site).
-		This is a program used to model chess pieces in OpenSCAD. There are two sections. If the section titled "Section 1" is uncommented and "Section 2" is commented out, it will produce all chess pieces of opposing colors in proper configuration. Otherwise, one of each piece will be produced for faster rendering.
-*/
 
 $fn = 100;
 
-// Zoom out to see image!
-
-module king(col){
+module king(col) {
 	rotate(90)
-	color(col)union(){
-		// Head
-		translate([0,0,120])
-			cylinder(20,12,20);
-		translate([0,0,140])
-		intersection(){
-			sphere(20);
+		color(col)union() {
+			// Head
+			translate([0,0,120])
+				cylinder(20,12,20);
+			translate([0,0,140])
+				intersection() {
+					sphere(20);
+					translate([0,0,50])
+						cube(100,true);
+				}
+			translate([0,0,168])
+				cube([4,4,20],true);
+			translate([0,0,170])
+				cube([4,16,4],true);
+			// Body
+  			cylinder(120,18,12);
+			// Base
+	  		intersection() {
+				sphere(30);
 				translate([0,0,50])
 					cube(100,true);
-				}
-		translate([0,0,168])
-			cube([4,4,20],true);
-		translate([0,0,170])
-			cube([4,16,4],true);
-
-		// Body
-  		cylinder(120,18,12);
-
-		// Base
-  		intersection(){
-			sphere(30);
-			translate([0,0,50])
-				cube(100,true);
-					}
-	
-		// Collar
-  		translate([0, 0, 110])
-    		intersection() {
+			}
+			// Collar
+  			translate([0, 0, 110])
+    			intersection() {
       			cylinder(20,20,0);
-     	 	translate([0, 0, 7])
-        		mirror([0, 0, 1])
-          		cylinder(20,20,0);
+     	 			translate([0, 0, 7])
+        				mirror([0, 0, 1])
+          				cylinder(20,20,0);
     			}
+			}
 		}
-}
 
-module queen(col){
-	color(col)union(){
+module queen(col) {
+	color(col)union() {
 		// Head
-
 		translate([0,0,122])
-		intersection(){
-			sphere(20);
+			intersection() {
+				sphere(20);
 				translate([0,0,57])
 					cube(100,true);
-				}
+			}
 		translate([0,0,120])
-			difference(){
-				difference(){
+			difference() {
+				difference() {
 					cylinder(20,12,30);
 					translate([0,0,8])
 						cylinder(20,12,30);
-						}
-					for(i=[1:3])
-						translate([0,0,35])
-							rotate(i*360/3)
-								cube([100,8,50],true);
+				}
+				for (i=[1:3])
+					translate([0,0,35])
+						rotate(i*360/3)
+							cube([100,8,50],true);
 			}
-		translate([0,0,145])
-			sphere(5);
-
-		// Body
-  		cylinder(120,18,12);
-
-		// Base
-  		intersection(){
-			sphere(30);
-			translate([0,0,50])
-				cube(100,true);
-					}
-	
-		// Collar
-  		translate([0, 0, 110])
-    		intersection() {
+			translate([0,0,145])
+				sphere(5);
+			// Body
+  			cylinder(120,18,12);
+			// Base
+  			intersection() {
+				sphere(30);
+				translate([0,0,50])
+					cube(100,true);				
+			}
+			// Collar
+  			translate([0, 0, 110])
+    			intersection() {
       			cylinder(20,20,0);
-     	 	translate([0, 0, 7])
-        		mirror([0, 0, 1])
-          		cylinder(20,20,0);
+     	 			translate([0, 0, 7])
+        				mirror([0, 0, 1])
+          				cylinder(20,20,0);
     			}
-	}
-}
+			}
+		}
 
-module rook(col){
-	color(col)union(){
+module rook(col) {
+	color(col)union() {
 		// Top
 		translate([0,0,120])
-			difference(){
-				union(){
+			difference() {
+				union() {
 					cylinder(25,40,40);
 					translate([0,0,-10])
 						cylinder(10,30,40);
-					}
-				union(){
+				}
+				union() {
 					translate([0,0,1])
 						cylinder(30,30,30);
-					for(i=[1:3])
+					for (i=[1:3])
 						translate([0,0,35])
 							rotate(i*360/3)
 								cube([100,15,50],true);
+				}
 			}
-
-		}
-			
-
-		
 			// Body
 			cylinder(120,30,30);
-		
 			// Base
-			intersection(){
+			intersection() {
 				sphere(40);
 				translate([0,0,50])
 					cube(100,true);
-				}
-
+			}
 			// Collar
 			translate([0,0,95])
-				intersection(){
+				intersection() {
 					cylinder(30,40,0);
 					translate([0,0,7])
 						mirror([0,0,1])
 							cylinder(30,40,0);
+				}
 			}
 		}
-}
 
-module bishop(col){
+module bishop(col) {
 	color(col)union() {
 		// Top
   		translate([0, 0, 120])
