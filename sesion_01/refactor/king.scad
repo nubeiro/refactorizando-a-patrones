@@ -79,10 +79,10 @@ module king(color) {
 	rotate(90)
 		color(color) 
 			union() {
-				head();
-				body();
 				base();
+				body();
 				collar();
+				head();
 			}
 }
 color = "white";
