@@ -41,7 +41,10 @@ module head() {
 }
 
 module body() {
-	cylinder(120,18,12);
+	HEIGHT = 120;
+	LOWER_RADIUS = 18;
+	HIGHER_RADIUS = 12;
+	cylinder(HEIGHT, LOWER_RADIUS, HIGHER_RADIUS);
 }
 
 module base() {
