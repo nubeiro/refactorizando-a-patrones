@@ -59,12 +59,19 @@ module base() {
 }
 
 module collar() {
-  	translate([0, 0, 110])
+	POSITION = [0, 0, 110];
+	CONE_HEIGHT = 20;
+	CONE_LOWER_RADIUS = 20;
+	CONE_UPPER_RADIUS = 0;
+	MIRRORED_CONE_POSITION = [0, 0, 7];
+	MIRROR_PLANE = [0, 0, 1];
+	
+  	translate(POSITION)
 		intersection() {
-      	cylinder(20,20,0);
-     	 	translate([0, 0, 7])
-        		mirror([0, 0, 1])
-          		cylinder(20,20,0);
+      	cylinder(CONE_HEIGHT, CONE_LOWER_RADIUS, UPPER_RADIUS);
+     	 	translate(MIRRORED_CONE_POSITION)
+        		mirror(MIRROR_PLANE)
+          		cylinder(CONE_HEIGHT, CONE_LOWER_RADIUS, UPPER_RADIUS);
     	}
 }
 
