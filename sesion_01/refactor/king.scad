@@ -1,12 +1,13 @@
 include <constants.scad>
+
 module dome(radius, position, size, center) {
 	intersection() {
 		sphere(radius);
 		translate(position)
 			cube(size, center);
 	}
-
 }
+
 module head() {
 	CONE_POSITION = [0, 0, 120];	
 	CONE_HEIGHT = 20;
