@@ -1,5 +1,12 @@
 include <constants.scad>
+module dome(radius, position, size, center) {
+	intersection() {
+		sphere(radius);
+		translate(position)
+			cube(size, center);
+	}
 
+}
 module head() {
 	CONE_POSITION = [0, 0, 120];	
 	CONE_HEIGHT = 20;
@@ -29,11 +36,7 @@ module head() {
 			CONE_UPPER_RADIUS
 		);
 	translate(DOME_POSITION)
-		intersection() {
-			sphere(DOME_HEIGHT);
-			translate(DOME_INTERSECTION_POSITION)
-				cube(DOME_INTERSECTION_CUBE_SIZE, DO_CENTER);
-		}
+		dome(DOME_HEIGHT, DOME_INTERSECTION_POSITION, DOME_INTERSECTION_CUBE_SIZE, DO_CENTER);
 	translate(VERTICAL_BEAM_POSITION)
 		cube(VERTICAL_BEAM_DIMENSIONS, DO_CENTER);
 	translate(HORIZONTAL_BEAM_POSITION)
@@ -51,27 +54,23 @@ module base() {
 	RADIUS = 30;
 	POSITION = [0, 0, 50];
 	SIZE = 100;
-	intersection() {
-		sphere(RADIUS);
-		translate(POSITION)
-			cube(SIZE, DO_CENTER);
-	}
+	dome(RADIUS, POSITION, SIZE, DO_CENTER);
 }
 
 module collar() {
 	POSITION = [0, 0, 110];
-	CONE_HEIGHT = 20;
-	CONE_LOWER_RADIUS = 20;
-	CONE_UPPER_RADIUS = 0;
-	MIRRORED_CONE_POSITION = [0, 0, 7];
+	HEIGHT = 20;
+	LOWER_RADIUS = 20;
+	UPPER_RADIUS = 0;
+	MIRRORED_POSITION = [0, 0, 7];
 	MIRROR_PLANE = [0, 0, 1];
-	
+
   	translate(POSITION)
 		intersection() {
-      	cylinder(CONE_HEIGHT, CONE_LOWER_RADIUS, UPPER_RADIUS);
-     	 	translate(MIRRORED_CONE_POSITION)
+      	cylinder(HEIGHT, LOWER_RADIUS, UPPER_RADIUS);
+     	 	translate(MIRRORED_POSITION)
         		mirror(MIRROR_PLANE)
-          		cylinder(CONE_HEIGHT, CONE_LOWER_RADIUS, UPPER_RADIUS);
+          		cylinder(HEIGHT, LOWER_RADIUS, UPPER_RADIUS);
     	}
 }
 
