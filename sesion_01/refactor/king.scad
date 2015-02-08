@@ -1,6 +1,6 @@
-module head() {
-	DO_CENTER = true;
+DO_CENTER = true;
 
+module head() {
 	CONE_POSITION = [0, 0, 120];	
 	CONE_HEIGHT = 20;
 	CONE_LOWER_RADIUS = 12;
@@ -48,10 +48,13 @@ module body() {
 }
 
 module base() {
+	BASE_RADIUS = 30;
+	BASE_INTERSECTION_POSITION = [0, 0, 50];
+	BASE_INTERSECTION_CUBE_SIZE = 100;
 	intersection() {
-		sphere(30);
-		translate([0,0,50])
-			cube(100,true);
+		sphere(BASE_RADIUS);
+		translate(BASE_INTERSECTION_POSITION)
+			cube(BASE_INTERSECTION_CUBE_SIZE, DO_CENTER);
 	}
 }
 
