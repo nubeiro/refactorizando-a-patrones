@@ -48,13 +48,13 @@ module body() {
 }
 
 module base() {
-	BASE_RADIUS = 30;
-	BASE_INTERSECTION_POSITION = [0, 0, 50];
-	BASE_INTERSECTION_CUBE_SIZE = 100;
+	RADIUS = 30;
+	POSITION = [0, 0, 50];
+	SIZE = 100;
 	intersection() {
-		sphere(BASE_RADIUS);
-		translate(BASE_INTERSECTION_POSITION)
-			cube(BASE_INTERSECTION_CUBE_SIZE, DO_CENTER);
+		sphere(RADIUS);
+		translate(POSITION)
+			cube(SIZE, DO_CENTER);
 	}
 }
 
