@@ -1,4 +1,4 @@
-DO_CENTER = true;
+include <constants.scad>
 
 module head() {
 	CONE_POSITION = [0, 0, 120];	
@@ -76,7 +76,7 @@ module collar() {
 }
 
 module king(color) {	
-	rotate(90)
+	rotate(RIGHT)
 		color(color) 
 			union() {
 				base();
