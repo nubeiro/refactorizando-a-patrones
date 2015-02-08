@@ -2,8 +2,6 @@ DO_CENTER = true;
 RIGHT = 90;
 GRANULARITY = 100;
 
-use <queen.scad>
-
 $fn = GRANULARITY;
 
 module dome(radius, position, size, center) {
@@ -14,7 +12,19 @@ module dome(radius, position, size, center) {
 	}
 }
 
-module head() {
+module body(height, lower_radius, upper_radius) {
+	cylinder(height, lower_radius, upper_radius);
+}
+
+module base() {
+	RADIUS = 30;
+	POSITION = [0, 0, 50];
+	SIZE = 100;
+	dome(RADIUS, POSITION, SIZE, DO_CENTER);
+}
+
+
+module king_head() {
 	CONE_POSITION = [0, 0, 120];	
 	CONE_HEIGHT = 20;
 	CONE_LOWER_RADIUS = 12;
@@ -50,20 +60,6 @@ module head() {
 		cube(HORIZONTAL_BEAM_DIMENSIONS, DO_CENTER);
 }
 
-module body() {
-	HEIGHT = 120;
-	LOWER_RADIUS = 18;
-	HIGHER_RADIUS = 12;
-	cylinder(HEIGHT, LOWER_RADIUS, HIGHER_RADIUS);
-}
-
-module base() {
-	RADIUS = 30;
-	POSITION = [0, 0, 50];
-	SIZE = 100;
-	dome(RADIUS, POSITION, SIZE, DO_CENTER);
-}
-
 module collar() {
 	POSITION = [0, 0, 110];
 	HEIGHT = 20;
@@ -82,15 +78,19 @@ module collar() {
 }
 
 module king(color) {	
+	HEIGHT = 120;
+	LOWER_RADIUS = 18;
+	UPPER_RADIUS = 12;
 	rotate(RIGHT)
 		color(color) 
 			union() {
 				base();
-				body();
+				body(HEIGHT, LOWER_RADIUS, UPPER_RADIUS);
 				collar();
-				head();
+				king_head();
 			}
 }
+
 module queen_head () {
 	HEAD_SIZE = 20;
 	HEAD_POSITION = [0,0,57];
@@ -114,26 +114,16 @@ module queen_head () {
 }
 
 module queen(color) {
+	HEIGHT = 120;
+	LOWER_RADIUS = 18;
+	UPPER_RADIUS = 12;
 	color(color) union() {
 		queen_head();
-			// Body
-  			cylinder(120,18,12);
-			// Base
-  			intersection() {
-				sphere(30);
-				translate([0,0,50])
-					cube(100,true);				
-			}
-			// Collar
-  			translate([0, 0, 110])
-    			intersection() {
-      			cylinder(20,20,0);
-     	 			translate([0, 0, 7])
-        				mirror([0, 0, 1])
-          				cylinder(20,20,0);
-    			}
-			}
-		}
+		body(HEIGHT, LOWER_RADIUS, UPPER_RADIUS);
+		base();
+		collar();
+	}
+}
 
 module rook(col) {
 	color(col)union() {
